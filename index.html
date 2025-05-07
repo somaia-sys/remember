@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>تسجيل الدخول</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2>تسجيل الدخول</h2>
+  <form onsubmit="return login()">
+    <input type="text" id="username" placeholder="اسم المستخدم" required><br>
+    <input type="password" id="password" placeholder="كلمة المرور" required><br>
+    <button type="submit">دخول</button>
+  </form>
+
+  <script>
+    function login() {
+      // يمكنك وضع شرط تحقق حقيقي هنا لاحقًا
+      window.location.href = "home.html"; // التوجيه إلى الصفحة الرئيسية
+      return false;
+    }
+  </script>
+</body>
+</html>

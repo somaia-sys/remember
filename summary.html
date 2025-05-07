@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>ملخص الإنجاز</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            direction: rtl;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .summary-box {
+            background-color: #f5f5f5;
+            padding: 20px;
+            margin: 30px auto;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 500px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .summary-box h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .summary-data {
+            font-size: 20px;
+            color: #555;
+        }
+
+        .back-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #009688;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .back-btn:hover {
+            background-color: #00796b;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="summary-box">
+        <h2>ملخص الإنجاز</h2>
+        <div class="summary-data" id="summaryData">
+            <!-- سيتم تعبئة البيانات بواسطة JavaScript -->
+        </div>
+        <button class="back-btn" onclick="window.location.href='home.html'">العودة للرئيسية</button>
+    </div>
+
+    <script>
+        // استرجاع المهام من localStorage
+        const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+        const completed = tasks.filter(task => task.completed).length;
+        const pending = tasks.length - completed;
+
+        document.getElementById('summaryData').innerHTML = `
+            <p>عدد المهام الكلي: ${tasks.length}</p>
+            <p>عدد المهام المنجزة: ${completed}</p>
+            <p>عدد المهام المتبقية: ${pending}</p>
+        `;
+    </script>
+
+</body>
+</html>

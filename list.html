@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>عرض المهام</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>عرض المهام</h1>
+        <div>
+            <button onclick="window.location.href='add.html'">إضافة مهمة جديدة</button>
+            <button onclick="window.location.href='home.html'">الصفحة الرئيسية</button>
+        </div>
+
+        <h2>قائمة المهام:</h2>
+        <div id="tasksContainer">
+            <!-- سيتم ملء المهام هنا عبر JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        // استرجاع المهام من localStorage
+        const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+        const tasksContainer = document.getElementById("tasksContainer");
+
+        if (tasks.length === 0) {
+            tasksContainer.innerHTML = "<p>لا توجد مهام حالياً.</p>";
+        } else {
+            tasks.forEach((task, index) => {
+                const taskDiv = document.createElement("div");
+                taskDiv.className = "task-item";
+                taskDiv.innerHTML = `
+                    <h3>${task.type}</h3>
+                    <p><strong>الوصف:</strong> ${task.description}</p>
+                    <p><strong>التاريخ:</strong> ${task.date}</p>
+                    <p><strong>الوقت:</strong> ${task.time}</p>
+                    <button onclick="editTask(${index})">تعديل</button>
+                    <button onclick="deleteTask(${index})">حذف</button>
+                    <hr>
+                `;
+                tasksContainer.appendChild(taskDiv);
+            });
+        }
+
+        function deleteTask(index) {
+            if (confirm("هل أنت متأكد من حذف هذه المهمة؟")) {
+                tasks.splice(index, 1);
+                localStorage.setItem("tasks", JSON.stringify(tasks));
+                location.reload();
+            }
+        }
+
+        function editTask(index) {
+            // حفظ الفهرس في التخزين المؤقت
+            localStorage.setItem("editTaskIndex", index);
+            window.location.href = "add.html";
+        }
+    </script>
+</body>
+</html>

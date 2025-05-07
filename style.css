@@ -1,0 +1,113 @@
+/* إعداد عام للصفحة */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #e0f7fa, #fffde7);
+    color: #333;
+    margin: 0;
+    padding: 0;
+    direction: rtl;
+}
+
+/* تنسيق الحاويات العامة */
+.container {
+    max-width: 90%;
+    margin: 30px auto;
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* العناوين */
+h1, h2 {
+    text-align: center;
+    color: #00796b;
+}
+
+/* الأزرار */
+button {
+    display: block;
+    width: 90%;
+    margin: 10px auto;
+    padding: 12px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #009688;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background-color: #00796b;
+}
+
+/* الحقول في النماذج */
+input[type="text"],
+input[type="datetime-local"],
+select,
+textarea {
+    width: 95%;
+    padding: 12px;
+    margin: 10px auto;
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 15px;
+}
+
+/* عناصر القائمة (المهام مثلاً) */
+.task {
+    background-color: #f1f8e9;
+    border-left: 5px solid #8bc34a;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+}
+
+/* الروابط */
+a {
+    color: #00796b;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* تصميم خاص لصفحة تسجيل الدخول */
+.login-box {
+    max-width: 400px;
+    margin: 60px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.login-box h2 {
+    color: #00796b;
+    margin-bottom: 20px;
+}
+
+/* لجعل التصميم مناسب للموبايل */
+@media (max-width: 600px) {
+    .container, .login-box {
+        padding: 20px;
+    }
+
+    h1, h2 {
+        font-size: 20px;
+    }
+
+    button {
+        font-size: 15px;
+        padding: 10px;
+    }
+
+    input, select, textarea {
+        font-size: 14px;
+    }
+}

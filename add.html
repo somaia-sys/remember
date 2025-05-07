@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>إضافة مهمة</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2>إضافة مهمة جديدة</h2>
+  <form id="taskForm">
+    <input type="text" placeholder="عنوان المهمة" id="taskTitle" required><br>
+    <input type="datetime-local" id="taskTime" required><br>
+    <select id="taskType">
+      <option value="واجب">📚 واجب</option>
+      <option value="مشروع">📁 مشروع</option>
+      <option value="محاضرة">🎓 محاضرة</option>
+      <option value="اختبار">📝 اختبار</option>
+      <option value="إشعار">🔔 إشعار</option>
+    </select><br><br>
+    <button type="submit">إضافة</button>
+  </form>
+
+  <script>
+    document.getElementById('taskForm').onsubmit = function(e) {
+      e.preventDefault();
+      // يمكن حفظ المهمة في localStorage أو backend حسب الحاجة
+      alert('تمت إضافة المهمة بنجاح!');
+      location.href = "home.html";
+    };
+  </script>
+</body>
+</html>
