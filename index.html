@@ -2,22 +2,138 @@
 <html lang="ar">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>تسجيل الدخول</title>
-  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #f0f4f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      direction: rtl;
+    }
+
+    .login-container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      width: 90%;
+      max-width: 400px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .divider {
+      text-align: center;
+      margin: 15px 0;
+      color: #888;
+    }
+  </style>
 </head>
 <body>
-  <h2>تسجيل الدخول</h2>
-  <form onsubmit="return login()">
-    <input type="text" id="username" placeholder="اسم المستخدم" required><br>
-    <input type="password" id="password" placeholder="كلمة المرور" required><br>
-    <button type="submit">دخول</button>
-  </form>
+
+  <div class="login-container">
+    <h2>تسجيل الدخول</h2>
+    <input type="email" id="email" placeholder="البريد الإلكتروني">
+    <input type="password" id="password" placeholder="كلمة المرور">
+    <button onclick="login()">تسجيل الدخول</button>
+
+    <div class="divider">أو</div>
+
+    <h2>إنشاء حساب جديد</h2>
+    <input type="email" id="newEmail" placeholder="البريد الإلكتروني الجديد">
+    <input type="password" id="newPassword" placeholder="كلمة المرور الجديدة">
+    <button onclick="signup()">تسجيل حساب</button>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-analytics-compat.js"></script>
 
   <script>
+    // إعداد Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyAKkg00OePKcu7UVDBT30hF6PYQq9JCRsY",
+      authDomain: "tazaker-tasks.firebaseapp.com",
+      projectId: "tazaker-tasks",
+      storageBucket: "tazaker-tasks.firebasestorage.app",
+      messagingSenderId: "939916791909",
+      appId: "1:939916791909:web:60bd36438ad004219af68c",
+      measurementId: "G-PT8H8BWG0Y"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+firebase.auth().signOut().then(() => {
+  console.log("تم تسجيل الخروج بنجاح");
+});
+
+// التحقق من حالة تسجيل الدخول
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    window.location.href = "home.html";
+  }
+});
+
+    // تسجيل الدخول
     function login() {
-      // يمكنك وضع شرط تحقق حقيقي هنا لاحقًا
-      window.location.href = "home.html"; // التوجيه إلى الصفحة الرئيسية
-      return false;
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      firebase.auth().signInWithEmailAndPassword(email, password)
+        .then(() => {
+          alert("تم تسجيل الدخول بنجاح");
+          window.location.href = "home.html";
+        })
+        .catch((error) => {
+          alert("خطأ: " + error.message);
+        });
+    }
+
+    // تسجيل حساب جديد
+    function signup() {
+      const email = document.getElementById("newEmail").value;
+      const password = document.getElementById("newPassword").value;
+
+      firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then(() => {
+          alert("تم إنشاء الحساب بنجاح");
+          window.location.href = "home.html";
+        })
+        .catch((error) => {
+          alert("خطأ: " + error.message);
+        });
     }
   </script>
 </body>
